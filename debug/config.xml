@@ -1,0 +1,9 @@
+
+<Conf>  
+
+	<Node PID=1 IP="192.168.54.97">
+		<Unit name="world"  path="./lua/world.lua" port=9086></Unit>  
+		<Unit name="zone1"  path="./lua/zone.lua" port=9553></Unit>  
+	</Node>
+
+</Conf>  

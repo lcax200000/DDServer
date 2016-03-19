@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../install-l53/include/lua.h
+stdarg.h
+-
+stddef.h
+-
+luaconf.h
+../install-l53/include/luaconf.h
+
+../install-l53/include/luaconf.h
+limits.h
+-
+stddef.h
+-
+stdint.h
+-
+assert.h
+-
+
+/mnt/shares/DDServer/lua-seri.c
+lua-seri.h
+/mnt/shares/DDServer/lua-seri.h
+
+/mnt/shares/DDServer/lua-seri.h
+lua.h
+-
+
