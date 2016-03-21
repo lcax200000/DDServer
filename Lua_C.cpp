@@ -19,6 +19,7 @@
 #include <sys/time.h>
 #include "ServiceObj.h"
 #include "Socket_Poll.h"
+#include "Timer_Queue.h"
 int traceback (lua_State *L) {
 	if(L == NULL)
 		return 0;
@@ -155,6 +156,19 @@ lsend(lua_State *L) {
 	return 1;
 }
 
+int
+lregtimer(lua_State *L)
+{
+	int secs = luaL_checkinteger(L, 1);
+	lua_getfield(L, LUA_REGISTRYINDEX, "service_handle");
+	int _handle = lua_tointeger(L, -1);
+
+	Time_Value tv;
+	tv.msec(secs);
+
+	lua_pushinteger(L, Timer_Queue::instance()->schedule_timer(_handle, tv));
+	return 1;
+}
 
 ServiceLua::ServiceLua(const char* path, int port) :m_path(path), m_port(port)
 {}
@@ -170,7 +184,8 @@ int lua_openmylib(lua_State *L)
 		{ "connect", lconnect },
 		{ "close", lclose },
 		{ "send", lsend },
-
+		{ "schedule_timer", lregtimer },
+		
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);

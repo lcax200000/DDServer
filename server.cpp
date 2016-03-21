@@ -5,7 +5,7 @@
 #include "Socket_Poll.h"
 #include "Lua_C.h"
 #include "ServiceObj.h"
-
+#include "Timer_Queue.h"
 #include "tinyxml.h"  
 #include "tinystr.h" 
 
@@ -19,11 +19,16 @@ void* workerThread(void* arg)
 	do_poll(epfd);
 }
 
+void* timerThread(void* arg)
+{
+
+	Timer_Queue::instance()->svc();
+}
+
 int main(int argc, char *const argv[]) 
 {
 	int pid = 1;
 	int port = -1;
-	
 
 	std::vector<Node> nodes;
 	//创建一个XML的文档对象。  
@@ -89,6 +94,9 @@ int main(int argc, char *const argv[])
 		for (j = 0; j < WORKER_PER_GROUP; ++j) 
 			pthread_create(SOCKET_SERVER.worker + (i * WORKER_PER_GROUP + j), NULL, workerThread, SOCKET_SERVER.epfd + i);
 	}
+	pthread_t serpd;
+	pthread_create(&serpd, NULL, timerThread, NULL);
+	
 
 
 	ServiceMgr::instance()->DoService();

@@ -26,6 +26,7 @@
 #define SOCKET_TYPE_CONNECT 1
 #define SOCKET_TYPE_CLOSE 2
 #define SOCKET_TYPE_CTRL 3
+#define SOCKET_TYPE_TIMEOUT 4
 
 
 struct connection_st 

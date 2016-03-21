@@ -215,7 +215,9 @@ int DDEvent::wait (Time_Value& time_value)
 	struct timeval tv;   
 	gettimeofday(&tv, NULL);   
 	abstime.tv_sec  = tv.tv_sec + time_value.msec() / 1000;   
-	abstime.tv_nsec = tv.tv_usec*1000 + (time_value.msec() % 1000)*1000000;   
+	abstime.tv_nsec = tv.tv_usec*1000 + (time_value.msec() % 1000)*1000000; 
+	//abstime.tv_sec = time_value.msec() / 1000;
+	//abstime.tv_nsec = (time_value.msec() % 1000) * 1000000;
 	if (abstime.tv_nsec >= 1000000000)   
 	{   
 		abstime.tv_nsec -= 1000000000;   
@@ -248,6 +250,8 @@ int DDEvent::wait (Time_Value& time_value)
 		//timeout return 1
 		return 1;
 	}
+	else
+		printf("rc != timeout %d\n", rc);
 	//wait event success return 0
 	return 0;
 #endif

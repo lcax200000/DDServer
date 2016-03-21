@@ -21,6 +21,9 @@ lclose(lua_State *L);
 static int
 lsend(lua_State *L);
 
+static int
+lregtimer(lua_State *L);
+
 
 class ServiceLua : public ServiceObj
 {
