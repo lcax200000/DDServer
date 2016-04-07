@@ -90,10 +90,6 @@ int do_listen(int handle, int port, int block)
 	evReg.data.ptr = ptc;
 
 	SOCKET_SERVER.slot[lisSock] = ptc;
-	if (lisSock==13)
-	{
-		int i = 0;
-	}
 	int res = epoll_ctl(SOCKET_SERVER.epfd[lisSock%EPOLL_NUM], EPOLL_CTL_ADD, lisSock, &evReg);
 	if (res != 0)
 	{
