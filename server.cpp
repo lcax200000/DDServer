@@ -27,6 +27,13 @@ void* timerThread(void* arg)
 
 int main(int argc, char *const argv[]) 
 {
+	signal(SIGPIPE,SIG_IGN);
+	signal(SIGQUIT,SIG_IGN);
+	signal(SIGUSR1,SIG_IGN);
+	signal(SIGALRM,SIG_IGN);
+	signal(SIGSEGV,SIG_IGN);
+	signal(SIGABRT,SIG_IGN);
+	
 	int pid = 1;
 	int port = -1;
 
