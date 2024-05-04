@@ -369,10 +369,6 @@ int handleReadEvent(connection_st* conn)
             printf("handleReadEvent errno %d \n", errno);
 			return -1;
 		}
-		else
-		{
-			return -1;
-		}
 	}
 
 	return 0;
